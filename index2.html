@@ -431,7 +431,7 @@
                      const nuevoRegistro = await agregarNuevoRegistro(formData);
                      if (nuevoRegistro) {
                        console.log('Registro creado exitosamente:', nuevoRegistro);
-                       window.location.href = 'https://wbsckt3.github.io/techGuardRips';                  
+                       window.location.href = 'https://wbsckt3.github.io/techGuardRips/index3.html';                  
                      } else {
                        console.error('Error al crear el registro.');
                      }
@@ -439,7 +439,7 @@
                   } else {
                     const data = await response.json();
                     if (data.GoogleSigninUser) {
-                       window.location.href = 'https://wbsckt3.github.io/techGuardRips';
+                       window.location.href = 'https://wbsckt3.github.io/techGuardRips/index3.html';
                        return data.GoogleSigninUser;
                     } else {
                       return null;
