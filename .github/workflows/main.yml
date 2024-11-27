@@ -32,6 +32,10 @@ jobs:
           name: vue-project-build
           path: build.zip
 
+       # 5. Instalar jq para procesar el JSON
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
   notify-central-repo:
     runs-on: ubuntu-latest
     needs: build-and-upload
