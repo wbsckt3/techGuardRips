@@ -15,26 +15,30 @@ jobs:
 
       # 2. Instalar dependencias y compilar el proyecto
       #- name: Install and build
-     #  run: |
+      #  run: |
       #    npm install
-     #     npm run build
+      #    npm run build
 
-       # Paso 2: Verificar archivos disponibles
+      # Paso 2: Verificar archivos disponibles
       - name: Verify static build
         run: |
           echo "Listing files in the repository:"
           ls -la
 
-          # Paso 3: Procesar los archivos si es necesario
+      # Paso 3: Procesar los archivos si es necesario
       # (Por ejemplo, copiar, comprimir o transferir archivos)
       - name: Process static files
         run: |
           echo "Processing static files"
           # Si necesitas copiar o mover los archivos, agrega tus comandos aquí
 
-      # 3. Comprimir el proyecto (opcional)
-      - name: Zip build folder
-        run: zip -r build.zip ./dist
+      # 3. Comprimir el proyecto (si no es el build de /dist)
+      # - name: Zip build folder
+      #  run: zip -r build.zip ./dist
+
+      # Paso 2: Comprimir el proyecto (archivos estáticos)
+      - name: Zip static files
+        run: zip -r build.zip ./*
 
       # 4. Subir el proyecto como artefacto
       - name: Upload artifact
