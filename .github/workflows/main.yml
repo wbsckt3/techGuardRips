@@ -14,10 +14,23 @@ jobs:
         uses: actions/checkout@v3
 
       # 2. Instalar dependencias y compilar el proyecto
-      - name: Install and build
+      #- name: Install and build
+     #  run: |
+      #    npm install
+     #     npm run build
+
+       # Paso 2: Verificar archivos disponibles
+      - name: Verify static build
         run: |
-          npm install
-          npm run build
+          echo "Listing files in the repository:"
+          ls -la
+
+          # Paso 3: Procesar los archivos si es necesario
+      # (Por ejemplo, copiar, comprimir o transferir archivos)
+      - name: Process static files
+        run: |
+          echo "Processing static files"
+          # Si necesitas copiar o mover los archivos, agrega tus comandos aquí
 
       # 3. Comprimir el proyecto (opcional)
       - name: Zip build folder
