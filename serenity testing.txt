@@ -1,5 +1,5 @@
 
-Prompt:
+Prompt: (para configurar gradle en local donde se corre el proyecto)
 
 FRONT Test automation GRADLE, SERENITY + screenplay pattern   
 hay una oportunidad de trabajo con este stack de testing, 
