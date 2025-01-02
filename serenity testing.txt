@@ -1,0 +1,100 @@
+
+Prompt:
+
+FRONT Test automation GRADLE, SERENITY + screenplay pattern   
+hay una oportunidad de trabajo con este stack de testing, 
+y necesito que me expliques que debo instalar y como proceder en mi equipo
+
+Chat gpt:
+
+Para configurar tu entorno para automatización de pruebas con Gradle, 
+Serenity BDD y el Screenplay pattern, sigue estos pasos:
+
+1. Instalar Java Development Kit (JDK)
+
+Serenity BDD y Gradle requieren JDK 11 o superior. Asegúrate de tenerlo instalado.
+Puedes verificar la instalación ejecutando java -version en tu terminal.
+
+2. Instalar Gradle:  https://gradle.org/releases/ > binary-only > 
+configurar variables de entorno del sistema GRADLE_HOME y en path %GRADLE_HOME%/bin (no requiere .exe)
+
+Descarga e instala Gradle desde gradle.org.
+Para verificar la instalación, usa gradle -v en la terminal.
+
+3. Configurar un Proyecto Serenity BDD con Gradle dentro del front VUE:
+
+ $ mkdir frontend-tests
+ $ cd frontend-tests
+ $ gradle init --type java-application
+ 
+4. Para añadir Serenity BDD y el Screenplay pattern al proyecto, necesitas actualizar el archivo build.gradle 
+con las dependencias necesarias: $ gradle --refresh-dependencies si hay cambios en este archivo.
+C:\Users\jzapata\Escritorio\VUE VITE VUETIFY VUEX\ripsjson_v2\front-testing\app\build.gradle
+
+	plugins {
+		// Apply the application plugin to add support for building a CLI application in Java.
+		id 'application'
+		id 'net.serenity-bdd.serenity-gradle-plugin' version '3.9.0'
+	}
+	repositories {
+		// Use Maven Central for resolving dependencies.
+		mavenCentral()
+	}
+	dependencies {
+		// Use JUnit Jupiter for testing.
+		testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+
+		// This dependency is used by the application.
+		implementation 'com.google.guava:guava:30.1.1-jre'
+	
+		// Dependencias básicas de Serenity
+		testImplementation 'net.serenity-bdd:serenity-core:3.9.0'
+		testImplementation 'net.serenity-bdd:serenity-junit5:3.9.0'
+		testImplementation 'net.serenity-bdd:serenity-screenplay:3.9.0'
+		testImplementation 'net.serenity-bdd:serenity-screenplay-webdriver:3.9.0'
+
+		// Selenium para interacción con navegadores
+		testImplementation 'org.seleniumhq.selenium:selenium-java:4.14.0'
+
+		// Asegúrate de tener un driver de navegador compatible
+		testRuntimeOnly 'org.seleniumhq.selenium:selenium-chrome-driver:4.14.0'
+		
+		// Para compatibilidad con ChromeDriver
+		testImplementation 'io.github.bonigarcia:webdrivermanager:5.5.0'
+
+	}
+	
+5. Estructurar el Proyecto para el Screenplay Pattern
+Crea las carpetas necesarias para aplicar Screenplay en:
+C:\Users\jzapata\Escritorio\VUE VITE VUETIFY VUEX\ripsjson_v2\front-testing\app\src\test\java\front\testing
+	
+	- tasks: para los archivos que representan las acciones que los actores pueden realizar.
+	- questions: para consultas o verificaciones del estado.
+	- ui: para definir los selectores y elementos de la interfaz.
+	- features: para los casos de prueba que definen la secuencia de tareas.
+
+6. Configurar Serenity Properties:
+C:\Users\jzapata\Escritorio\VUE VITE VUETIFY VUEX\ripsjson_v2\front-testing\app\src\test\resources\serenity.conf
+
+	serenity.project.name = "Vue 3 Frontend Tests"
+	webdriver.base.url = http://127.0.0.1:5173/techGuardRips   (la URL que entrega $ npm run dev de vue 3)
+	serenity.driver = chrome
+
+7. Ejecutar las Pruebas
+
+Ejecuta las pruebas usando Gradle:
+
+ $ gradle clean test aggregate
+ 
+Esto genera un reporte de Serenity en target/site/serenity. y en:  
+
+front-testing/app/build/reports/tests/test/packages/front.testing.html
+
+Recomendaciones
+Familiarízate con el patrón Screenplay, donde los Actores realizan Tareas y responden Preguntas. 
+Cada prueba simula un flujo de usuario en términos de interacciones y verificaciones.
+Consulta la documentación de Serenity BDD para detalles específicos del Screenplay pattern y mejores prácticas.
+Con esta configuración, deberías estar listo para trabajar con Gradle, Serenity y Screenplay en tus pruebas 
+automatizadas.
+
+
